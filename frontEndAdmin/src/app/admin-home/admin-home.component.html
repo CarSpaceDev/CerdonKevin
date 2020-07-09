@@ -1,0 +1,108 @@
+<!-- 
+
+<nav class="navbar navbar-expand-sm  " style="background-color: #0a0e3a">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+       <h2>  <a style="color: white">Welcome</a></h2> 
+     </div>
+ 
+    </div>
+    <ul class="nav navbar-nav" routerLinkActive="active">
+        <li (click)="auth.signOut()" ><button class="btn btn-outline-light mr-2  ">Log Out</button></li>
+
+  
+   
+    </ul>
+  </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-sm fixed-top " style="background-color: #0a0e3a">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0">
+    <h2>  <a style="color: white">CarSpace</a></h2> 
+  </a>
+</nav>
+
+
+<div class="container">
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column" >
+          <li class="nav-item">
+            <a class="nav-link active" (click)="getUsers()">
+              <i class="fas fa-user"></i>View All Users
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" (click)="_authService.signOut()">
+              <i class="fas fa-user"></i>Log Out
+            </a>
+          </li>
+          </ul>
+        </div>
+        </nav>
+    <!-- <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active">
+              <i class="fas fa-user"></i>User Profile
+            </a>
+          </li> -->
+          <!-- Calling SignOut() Api from AuthService -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" (click)="auth.signOut()">
+              <i class="fas fa-sign-out-alt"></i>Log out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav> -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="inner-adjust">
+            <div class="pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2"></h1>
+              </div>   
+          
+          <!-- Show user data when logged in -->
+          <div class="row" *ngFor="let com of listuser">
+               
+                <td>{{com.email}}</td>
+                <td>{{com.displayName}}</td>
+              
+                <img class="align-self-start mr-5 img-thumbnail rounded-circle" src='{{com.photoURL}}'>
+          </div>
+  
+        </div>
+      </main>
+   
+
+  </div>
+</div>
+
+
+
+
+
+<!-- 
+<p>admin-home works!</p>
+<h2> Get Request</h2>
+
+<table>
+        <tr>
+            
+            <th>Email</th>
+            <th>Name</th>
+            <th>Photo</th>
+        </tr>
+            <tr *ngFor="let com of listuser">
+              
+                <td>{{com.email}}</td>
+                <td>{{com.displayName}}</td>
+              
+                <img class="align-self-start mr-5 img-thumbnail rounded-circle" src='{{com.photoURL}}'>
+            </tr>
+</table> -->

@@ -1,0 +1,176 @@
+<!-- 
+
+<nav class="navbar navbar-expand-sm  " style="background-color: #0a0e3a">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+       <h2>  <a style="color: white">Welcome</a></h2> 
+     </div>
+ 
+    </div>
+    <ul class="nav navbar-nav" routerLinkActive="active">
+        <li (click)="auth.signOut()" ><button class="btn btn-outline-light mr-2  ">Log Out</button></li>
+
+  
+   
+    </ul>
+  </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-sm fixed-top " style="background-color: #0a0e3a">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0">
+  <h1>Welcome</h1>
+  </a>
+</nav>
+
+
+<div class="container">
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active">
+              <i class="fas fa-user"></i>View All Users
+            </a>
+          </li>
+          </ul>
+        </div>
+        </nav>
+    <!-- <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active">
+              <i class="fas fa-user"></i>User Profile
+            </a>
+          </li> -->
+          <!-- Calling SignOut() Api from AuthService -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" (click)="auth.signOut()">
+              <i class="fas fa-sign-out-alt"></i>Log out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav> -->
+
+    <!-- Main content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="inner-adjust">
+
+        <div class="pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Were Setting up your profile</h1>
+        </div>
+        <!-- Show user data when logged in -->
+        <div class="row" *ngIf="auth.user$ as users">
+          <div class="col-md-12">
+            <div class="media">
+        <img class="align-self-start mr-5 img-thumbnail rounded-circle" src='{{user?.photoURL}}'>
+              <div class="media-body">
+                <h1>Hello: <strong>{{user?.email}}</strong></h1>
+                <!-- <p>User ID: <strong>{{user?.uid}}</strong></p>
+                <p>Email: <strong>{{user?.email}}</strong></p>
+                <p>Photo: <strong>{{user?.photoURL}}</strong></p>
+               -->
+              </div>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+      <form>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label for="firstName">First name</label>
+            <input ngModel #firstname="ngModel" name="firstName" type="text" class="form-control" id="firstName">
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="lastName">Last name</label>
+            <input ngModel #lastname="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label for="carType">Car Type</label>
+            <input ngModel #carType="ngModel" name="carType" type="text" class="form-control" id="carType">
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="plateNumber">Plate Number</label>
+            <input ngModel #plateNumber="ngModel" name="plateNumber" type="text" class="form-control" id="plateNumber" value="">
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="orCr">Or / Cr</label>
+            <input ngModel #orCr="ngModel" name="orCr" type="text" class="form-control" id="orCr" value="">
+          </div>
+        </div>
+    
+
+   
+        <div>
+          <div class="row">
+            
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-primary"  type="submit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="row mt-4" style="width: 40%;">
+    <div class="col-12">
+      <h4>User Registration</h4>
+    </div>
+  
+    <div class="col-12">
+   
+   
+      <form #driverDetails="ngForm" (ngSubmit)="updateProfileDriver(driverDetails)" >
+        <div class="row">
+          <div class="col-md-6 mb-2" >
+            <label for="firstName">First name</label>
+            <input ngModel #firstName="ngModel" name="firstName" type="text" class="form-control" id="firstName">
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="lastName">Last name</label>
+            <input ngModel #lastName="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="">
+          </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6 mb-2">
+          <label for="lastName">License Number</label>
+          <input ngModel #licenseNumber="ngModel" name="licenseNumber" type="text" class="form-control" id="licenseNumber" value="">
+        </div>
+   
+    
+    </div>
+
+   
+        <div>
+      
+          
+        
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div> -->
