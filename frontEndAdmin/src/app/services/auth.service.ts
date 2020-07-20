@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { User } from "./user";
+import { User } from "../model/user";
 import { Observable, of, throwError } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -14,7 +14,7 @@ The most important element this feature is being able to react to changes to the
  When logged-out, will have an Observable of null. When logged-in, we want to switchMap to an Observable of 
  the user’s profile document in Firestore. This is equivilent joining custom data and we can set this up in 
  the constructor. */
-
+ const baseUrl = 'http://localhost:3000/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -60,8 +60,9 @@ export class AuthService {
 
   createUsers(user: User) {
     console.log(user);
-    return this.http.post(`http://localhost:3000/user/requestUserInfo`,user).
-        pipe(
+    // return this.http.post(`http://localhost:3000/user/requestUserInfo`,user).
+    return this.http.post(`${baseUrl}/requestUserInfo`,user).   
+      pipe(
            map((data: any) => {
             
              console.log("data here");
@@ -131,29 +132,6 @@ export class AuthService {
   }
 
 
-   private updateUserData(user){
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-
-     const userData: User = {
-      uid: user.authId,
-       email: user.email,
-       displayName: user.displayName,
-       photoURL: user.photoURL
-     }
- 
-   
- 
-     return userRef.set(userData, 
-      { merge: true
-       })
-
-   }
-
-   get isLoggedIn(): boolean {
-    const user = this.userData
-    return (user !== null) ? true : false;
-  }
-
    async signOut(){
      await this.afAuth.signOut();
      this.router.navigate(['/']);
@@ -165,8 +143,12 @@ export class AuthService {
   console.log("the is a test");
  }
 
- getAllUsers(): Observable<any>{
-   return this.http.get("http://localhost:3000/user/showAll")
- }
+//  getAllUsers(): Observable<any>{
+//    return this.http.get("http://localhost:3000/user/showAll")
+//  }
+//  getAllUsers(): Observable<any>{
+//   return this.http.get(`${baseUrl}/showAll`);
+// }
+
 
 }

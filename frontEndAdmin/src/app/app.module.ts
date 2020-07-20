@@ -16,9 +16,18 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { enableProdMode } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
-import { AuthService } from './auth.service';
-
-
+import { AuthService } from './services/auth.service';
+import { AdminShowListUsersComponent } from './admin-show-list-users/admin-show-list-users.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSortModule} from '@angular/material/sort';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar'
+import { EditDriverDetailsComponent } from './edit-driver-details/edit-driver-details.component';
 const  firebaseConfig= {
          apiKey: "AIzaSyCd7ZohcO9zwIJ6UWnVN_xUi-bh27Wh0i4",
          authDomain: "carspace-alpha.firebaseapp.com",
@@ -35,6 +44,10 @@ const routes: Routes = [
   { path: 'driverregistration', component: DriverRegistrationComponent },
   { path: '', component: NavigationComponent },
   { path: 'adminhome', component: AdminHomeComponent },
+  { path: 'adminhome/uid', component: AdminHomeComponent },
+  { path: 'adminshowlistusers', component: AdminShowListUsersComponent},
+ 
+
 
 ];
 
@@ -47,6 +60,8 @@ const routes: Routes = [
     LotOwnerRegistrationComponent,
     UserProfileComponent,
     AdminHomeComponent,
+    AdminShowListUsersComponent,
+    EditDriverDetailsComponent,
  
   ],
   imports: [
@@ -57,14 +72,28 @@ const routes: Routes = [
     AngularFirestoreModule,
     AngularFireAuthModule,
     HttpClientModule,
-    
-  
-
-    
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSortModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSnackBarModule,
     RouterModule.forRoot(routes)
   ],
+  exports: [  MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule ],
+  
   providers: [ AuthService ],
   bootstrap: [AppComponent],
+  entryComponents:[EditDriverDetailsComponent]
 
 })
 export class AppModule { }

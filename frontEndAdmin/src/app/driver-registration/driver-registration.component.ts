@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 @Component({
   selector: 'app-driver-registration',

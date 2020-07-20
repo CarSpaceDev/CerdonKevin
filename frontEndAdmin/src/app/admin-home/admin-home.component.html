@@ -32,7 +32,7 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column" >
           <li class="nav-item">
-            <a class="nav-link active" (click)="getUsers()">
+            <a class="nav-link active" routerLink="/adminshowlistusers">
               <i class="fas fa-user"></i>View All Users
             </a>
           </li>
@@ -66,16 +66,51 @@
             <div class="pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2"></h1>
               </div>   
-          
+             
+            <div class="row">
+              <div class="md-form mt-0">
+                <input class="form-control mr-sm-2" type="text" [(ngModel)]="uid" placeholder="Search">
+               
+                  <button type="button" class="nav-link active" (click)="search()">search</button>
+              
+               
+              </div>
+             
+          </div>
+
+              <div class =" row row-cols-1 row-cols-md-3" >
+                <div class ="col mb-4" *ngFor="let com of listuser">
+                  <div class = "card">
+                    <td>Email: {{com.email}}</td>
+                    <td>Phone#: {{com.phone_number}}</td>
+                    <td>Raitng: {{com.rating}}</td>
+                  <div > <button type="button" class="btn btn-success">Update</button></div>
+                 </div>
+                </div>
+              </div>
+
+              <div class =" row row-cols-1 row-cols-md-3" >
+                <div class ="col mb-4" *ngFor="let com of lst">
+                  <div class = "card">
+                  <td>Email: {{com.email}}</td>
+                  <td>Phone#: {{com.phone_number}}</td>
+                  <td>Rating: {{com.rating}}</td>
+                  <div > <button type="button" class="btn btn-success">Update</button></div>
+                 </div>
+                </div>
+              </div>
+
+
+
           <!-- Show user data when logged in -->
-          <div class="row" *ngFor="let com of listuser">
+          <!-- <div class="row" *ngFor="let com of listuser">
                
                 <td>{{com.email}}</td>
                 <td>{{com.displayName}}</td>
               
                 <img class="align-self-start mr-5 img-thumbnail rounded-circle" src='{{com.photoURL}}'>
           </div>
-  
+   -->
         </div>
       </main>
    
