@@ -1,6 +1,7 @@
 export class DriverDTO{
     _id: string;
+    authId: string;
     email: string;
-    phone_number: string;
-    
+    displayName: string;
+    phoneNumber: string;
 }

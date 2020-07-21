@@ -22,8 +22,8 @@ export class EditDriverDetailsComponent implements OnInit {
     this.dialogbox.close();
     this.service.filter('Register Click')
   }
-  onSubmit(_id,form: NgForm){
-    this.service.update(_id,form.value).subscribe(res=>{
+  onSubmit(form: NgForm){
+    this.service.update(form.value).subscribe(res=>{
       this.snackBar.open(res.toString(),'Sucessfuly Updated',{
         duration:5000,
         verticalPosition:'top'

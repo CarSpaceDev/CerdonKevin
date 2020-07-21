@@ -6,7 +6,8 @@ import { switchMap, filter } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import {Subject} from 'rxjs';
-const baseUrlDriver = 'http://localhost:3000/driver';
+import { DriverDTO } from '../model/driver.dto';
+const baseUrlDriver = 'http://localhost:3000/User';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class DriverService {
     }
     formData: Driver;
     getAllUsers(): Observable<Driver[]>{
-      return this.http.get<Driver[]>('http://localhost:3000/driver/showAll');
+ 
+      return this.http.get<Driver[]>(`${baseUrlDriver}/all`);
+ 
     }
     
      get(uid){
@@ -27,11 +30,17 @@ export class DriverService {
       return this.http.get(`${baseUrlDriver}/${uid}`);
      }
     
-     update(uid, driv: Driver){
-       console.log('helo');
-       console.log(uid, driv);
-       return this.http.put(`${baseUrlDriver}/${uid}`, driv);
-     }
+    //  update(uid, driv: Driver){
+    //    console.log('helo');
+    //    console.log(uid, driv);
+    //    return this.http.put(`${baseUrlDriver}/${uid}`, driv);
+    //  }
+
+     update(driv: Driver){
+      console.log('helo');
+      console.log(`${baseUrlDriver}/${driv._id}`);
+      return this.http.put(`${baseUrlDriver}/${driv._id}`,driv);
+    }
     
      delete(uid){
        console.log(uid);

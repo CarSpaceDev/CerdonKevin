@@ -25,7 +25,7 @@ export class AdminShowListUsersComponent implements OnInit {
      }
 
 listData : MatTableDataSource<any>;
-displayedColumns: string[] = ['Options', 'Id', 'Email', 'Phone Number'];
+displayedColumns: string[] = ['Options', 'Id', 'Email', 'DisplayName', 'Phone Number'];
 @ViewChild(MatSort, { static: false }) sort: MatSort;
   ngOnInit(): void {
     this.refreshDriverList();
@@ -39,7 +39,7 @@ displayedColumns: string[] = ['Options', 'Id', 'Email', 'Phone Number'];
     }
   );
  }
- onEdit(driv: DriverDTO){
+ onEdit(_id: string,driv: DriverDTO){
   console.log(driv);
    this.service.formData=driv;
  
@@ -50,10 +50,10 @@ displayedColumns: string[] = ['Options', 'Id', 'Email', 'Phone Number'];
    this.dialog.open(EditDriverDetailsComponent, dialogConfig);
 
  }
- onDelete(_id: string){
+ onDelete(authId: string){
    if(confirm('Are you sure to delete??'))
    {
-     this.service.delete(_id).subscribe(res=>{
+     this.service.delete(authId).subscribe(res=>{
        this.refreshDriverList();
        this.snackBar.open(res.toString(),'',{
          duration:5000,
