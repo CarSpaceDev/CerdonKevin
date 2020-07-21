@@ -1,5 +1,5 @@
 export class User{
-    uid: string;
+    authId: string;
     email: string;
     displayName: string;
     photoURL: string;

@@ -28,6 +28,7 @@ import {MatDialogModule} from '@angular/material/dialog'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar'
 import { EditDriverDetailsComponent } from './edit-driver-details/edit-driver-details.component';
+import {MatPaginatorModule} from '@angular/material/paginator'; 
 const  firebaseConfig= {
          apiKey: "AIzaSyCd7ZohcO9zwIJ6UWnVN_xUi-bh27Wh0i4",
          authDomain: "carspace-alpha.firebaseapp.com",
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'adminhome', component: AdminHomeComponent },
   { path: 'adminhome/uid', component: AdminHomeComponent },
   { path: 'adminshowlistusers', component: AdminShowListUsersComponent},
+  { path: 'editdriverdetails', component: EditDriverDetailsComponent},
  
 
 
@@ -81,6 +83,7 @@ const routes: Routes = [
     MatInputModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatPaginatorModule,
     RouterModule.forRoot(routes)
   ],
   exports: [  MatTableModule,
@@ -89,7 +92,8 @@ const routes: Routes = [
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule ],
+    MatSnackBarModule,
+    MatPaginatorModule ],
   
   providers: [ AuthService ],
   bootstrap: [AppComponent],

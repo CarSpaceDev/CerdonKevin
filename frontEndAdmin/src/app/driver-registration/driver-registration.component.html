@@ -30,13 +30,7 @@
   <div class="row">
     <nav class="col-md-2 d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active">
-              <i class="fas fa-user"></i>View All Users
-            </a>
-          </li>
-          </ul>
+       
         </div>
         </nav>
     <!-- <nav class="col-md-2 d-md-block bg-light sidebar">
@@ -65,45 +59,31 @@
           <h1 class="h2">Were Setting up your profile</h1>
         </div>
         <!-- Show user data when logged in -->
-        <div class="row" *ngIf="auth.user$ as users">
-          <div class="col-md-12">
-            <div class="media">
-        <img class="align-self-start mr-5 img-thumbnail rounded-circle" src='{{user?.photoURL}}'>
-              <div class="media-body">
-                <h1>Hello: <strong>{{user?.email}}</strong></h1>
-                <!-- <p>User ID: <strong>{{user?.uid}}</strong></p>
-                <p>Email: <strong>{{user?.email}}</strong></p>
-                <p>Photo: <strong>{{user?.photoURL}}</strong></p>
-               -->
-              </div>
-            </div>
-          </div>
-        </div>
+     
        
       </div>
-      <form>
+      <form #form="ngForm" (submit)="onSubmit(form)">
+     
         <div class="row">
           <div class="col-md-6 mb-2">
-            <label for="firstName">First name</label>
-            <input ngModel #firstname="ngModel" name="firstName" type="text" class="form-control" id="firstName">
-          </div>
-          <div class="col-md-6 mb-2">
-            <label for="lastName">Last name</label>
-            <input ngModel #lastname="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-2">
-            <label for="carType">Car Type</label>
-            <input ngModel #carType="ngModel" name="carType" type="text" class="form-control" id="carType">
+            <label for="vehicleColor">Vehicle Color</label>
+            <input [(ngModel)]="form.vehicleColor" #vehicleColor="ngModel" name="vehicleColor" type="text" class="form-control" id="vehicleColor">
           </div>
           <div class="col-md-6 mb-2">
             <label for="plateNumber">Plate Number</label>
-            <input ngModel #plateNumber="ngModel" name="plateNumber" type="text" class="form-control" id="plateNumber" value="">
+            <input [(ngModel)]="form.plateNumber" #plateNumber="ngModel" name="plateNumber" type="text" class="form-control" id="plateNumber">
           </div>
           <div class="col-md-6 mb-2">
-            <label for="orCr">Or / Cr</label>
-            <input ngModel #orCr="ngModel" name="orCr" type="text" class="form-control" id="orCr" value="">
+            <label for="type">Type</label>
+            <input [(ngModel)]="form.type" #type="ngModel" name="type" type="text" class="form-control" id="type" value="">
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="registrationExpires">Registration Expires</label>
+            <input [(ngModel)]="form.registrationExpires" #registrationExpires="ngModel" name="registrationExpires" type="date" class="form-control" id="registrationExpires" >
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="uploadFiles">Upload Files</label>
+            <input  [(ngModel)]="form.uploadFiles" #uploadFiles="ngModel" name="uploadFiles" type="file" class="field" id="uploadFiles" obsereFiles>
           </div>
         </div>
     

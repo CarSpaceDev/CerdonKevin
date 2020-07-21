@@ -5,16 +5,18 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from "../model/user";
+
 import { Observable, of, throwError } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import { DriverDTO } from '../model/driver.dto';
 /*Observe the AuthState
 The most important element this feature is being able to react to changes to the user’s authentiaction state.
  When logged-out, will have an Observable of null. When logged-in, we want to switchMap to an Observable of 
  the user’s profile document in Firestore. This is equivilent joining custom data and we can set this up in 
  the constructor. */
- const baseUrl = 'http://localhost:3000/user';
+ const baseUrl = 'http://localhost:3000/User';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +24,8 @@ export class AuthService {
 
   user$: Observable<any>;
   userData: any;
+
+  
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -29,6 +33,7 @@ export class AuthService {
     public ngZone: NgZone,
     private http: HttpClient
   ) 
+
   {
     //get the auth state, then fetch the firestore user document or return null
     // this.user$ = this.afAuth.authState.pipe(
@@ -59,20 +64,22 @@ export class AuthService {
   }
 
   createUsers(user: User) {
-    console.log(user);
-    // return this.http.post(`http://localhost:3000/user/requestUserInfo`,user).
-    return this.http.post(`${baseUrl}/requestUserInfo`,user).   
+  
+    // return this.http.post(`http://localhost:3000/user/requestUserInfo`,user)
+
+    return this.http.post(`${baseUrl}/register`,user).   
       pipe(
-           map((data: any) => {
-            
-             console.log("data here");
-             console.log(data);
+           map((data: User) => {
+             //console.log(data);
+             data.authId = data.authId
              return data;
            }), catchError( error => {
              return throwError( 'Something went wrong!' );
            })
         )
     }
+ 
+
   //  async googleSignIn(){
   //    const provider = new auth.GoogleAuthProvider();
   //    const credential = await this.afAuth.signInWithPopup(provider);
@@ -84,18 +91,29 @@ export class AuthService {
     .then((result) => {
        this.ngZone.run(() => {
         let  userData: User = {
-          uid: result.user.uid,
+          authId: result.user.uid,
           email: result.user.email,
           displayName: result.user.displayName,
           photoURL: result.user.photoURL
          }
-
-        console.log("user data ");
-
+        var aId= sessionStorage.setItem("authId", result.user.uid );
+        //  console.log(userData.authId);
+        //  this.http.post<User>(`${baseUrl}/find`,{"authId": userData.authId}).subscribe( data=> {
+        //   console.log(data.authId );
+          
+          
+         
+        //    });
+   
       
-          this.createUsers(userData).subscribe((res)=>{ 
-       
+           this.createUsers(userData).subscribe((res)=>{ 
           });
+        
+        
+
+
+    
+
         if(result.user.email === "kevin@bsit.usjr.edu.ph")
         {
       
@@ -115,13 +133,14 @@ export class AuthService {
         // })
           this.router.navigate(['adminhome']);
           // console.log(userData);
-          // console.log(userData.email);
+        
           // console.log(userData.uid);
         
         }
         else{
-        console.log(result.user.displayName);
-        console.log(result.user.uid);
+     
+          
+       
           this.router.navigate(['driverregistration']);
          }
         })

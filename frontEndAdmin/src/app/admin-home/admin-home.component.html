@@ -32,7 +32,7 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column" >
           <li class="nav-item">
-            <a class="nav-link active" routerLink="/adminshowlistusers">
+            <a class="nav-link active" routerLink="/admin-home">
               <i class="fas fa-user"></i>View All Users
             </a>
           </li>
@@ -61,44 +61,15 @@
         </ul>
       </div>
     </nav> -->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <main role="main" class=".col-lg ml-sm-auto col-lg-11 px-4" >
+      
+
         <div class="inner-adjust">
             <div class="pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2"></h1>
               </div>   
              
-            <div class="row">
-              <div class="md-form mt-0">
-                <input class="form-control mr-sm-2" type="text" [(ngModel)]="uid" placeholder="Search">
-               
-                  <button type="button" class="nav-link active" (click)="search()">search</button>
-              
-               
-              </div>
-             
-          </div>
-
-              <div class =" row row-cols-1 row-cols-md-3" >
-                <div class ="col mb-4" *ngFor="let com of listuser">
-                  <div class = "card">
-                    <td>Email: {{com.email}}</td>
-                    <td>Phone#: {{com.phone_number}}</td>
-                    <td>Raitng: {{com.rating}}</td>
-                  <div > <button type="button" class="btn btn-success">Update</button></div>
-                 </div>
-                </div>
-              </div>
-
-              <div class =" row row-cols-1 row-cols-md-3" >
-                <div class ="col mb-4" *ngFor="let com of lst">
-                  <div class = "card">
-                  <td>Email: {{com.email}}</td>
-                  <td>Phone#: {{com.phone_number}}</td>
-                  <td>Rating: {{com.rating}}</td>
-                  <div > <button type="button" class="btn btn-success">Update</button></div>
-                 </div>
-                </div>
-              </div>
+           <app-admin-show-list-users></app-admin-show-list-users>
 
 
 
@@ -113,7 +84,7 @@
    -->
         </div>
       </main>
-   
+  </div>
 
   </div>
 </div>

@@ -4,9 +4,11 @@ import {MatSort} from '@angular/material/sort';
 import { DriverService } from '../services/driver.service';
 import {Driver} from '../model/driver';
 import {DriverDTO} from '../model/driver.dto';
+
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar'
+import {MatPaginator} from '@angular/material/paginator'
 import { EditDriverDetailsComponent } from '../edit-driver-details/edit-driver-details.component';
 @Component({
   selector: 'app-admin-show-list-users',
@@ -26,7 +28,7 @@ export class AdminShowListUsersComponent implements OnInit {
 
 listData : MatTableDataSource<any>;
 displayedColumns: string[] = ['Options', 'Id', 'Email', 'DisplayName', 'Phone Number'];
-@ViewChild(MatSort, { static: false }) sort: MatSort;
+@ViewChild(MatSort, {static: true}) sort: MatSort; paginator: MatPaginator;
   ngOnInit(): void {
     this.refreshDriverList();
   }
@@ -36,10 +38,13 @@ displayedColumns: string[] = ['Options', 'Id', 'Email', 'DisplayName', 'Phone Nu
   .subscribe( data=> {
         this.listData = new MatTableDataSource(data);
         this.listData.sort = this.sort;
+        this.listData.paginator = this.paginator;
     }
+    
   );
+  
  }
- onEdit(_id: string,driv: DriverDTO){
+ onEdit(_id: string,driv: Driver){
   console.log(driv);
    this.service.formData=driv;
  
@@ -57,7 +62,7 @@ displayedColumns: string[] = ['Options', 'Id', 'Email', 'DisplayName', 'Phone Nu
        this.refreshDriverList();
        this.snackBar.open(res.toString(),'',{
          duration:5000,
-         verticalPosition: 'top'
+         verticalPosition: 'bottom'
        });
      });
    }

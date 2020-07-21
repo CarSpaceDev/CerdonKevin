@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { DriverService } from '../services/driver.service';
 import { User } from '../model/user';
 import { unescapeIdentifier } from '@angular/compiler';
+
 @Component({
   selector: 'app-admin-home',
   templateUrl: './admin-home.component.html',
@@ -12,10 +13,12 @@ import { unescapeIdentifier } from '@angular/compiler';
 export class AdminHomeComponent implements OnInit {
   uid: string;
   lst: any;
+
   constructor( public driver: DriverService, public _authService: AuthService, private http: HttpClient) { }
   listuser: any;
 
   ngOnInit() {
+  
   // this._authService.getAllUsers()
   //   .subscribe
   //   (
@@ -27,9 +30,11 @@ export class AdminHomeComponent implements OnInit {
 
   //   );
   // }
-
 }
+
+
  getUsers(){
+ 
   this.driver.getAllUsers()
   .subscribe
   (

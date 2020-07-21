@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { NgForm } from '@angular/forms';
+import { User } from '../model/user';
 @Component({
   selector: 'app-driver-registration',
   templateUrl: './driver-registration.component.html',
@@ -12,39 +14,20 @@ export class DriverRegistrationComponent implements OnInit {
   home: firebase.User;
   user: firebase.User;
   driver=[];
-  data;
+  id: any;
 
   constructor(public auth: AuthService,
     private router: Router, private firestore: AngularFirestore
   ) { }
 
   ngOnInit() {
-    this.auth.getUserState()
-      .subscribe( home => {
-        this.home = home;
-      })
-    this.auth.getUserState()
-    .subscribe( user => {
-      this.user = user
-    })
-    this.firestore
-    .collection('driverList')
-    .ref.get()
-    .then((snapshot) =>{
-        snapshot.forEach((doc) =>{
-          this.driver.push(doc.data());
-        });
-    });
+
  
   }
-  updateProfileDriver(userDetails){
-    this.data ={
-        firstName: userDetails.firstName,
-        lastName: userDetails.firstName,
-        licenseNumber: userDetails.firstName
-    };
-    this.firestore
-    .collection('driverList')
-    .doc(userDetails).set(this.data)
-  }
+ onSubmit(form: NgForm){
+   //console.log(this.data.authId);
+   this.id=sessionStorage.getItem("authId");
+   console.log(this.id);
+console.log(form);
+ }
 }
