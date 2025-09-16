@@ -1,9 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 // import { User } from './user.model';
-import { auth } from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Auth, GoogleAuthProvider, signInWithPopup, signOut, authState } from '@angular/fire/auth';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { User } from "../model/user";
 
 import { Observable, of, throwError } from 'rxjs';
@@ -27,8 +26,8 @@ export class AuthService {
 
   
   constructor(
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
+    private auth: Auth,
+    private firestore: Firestore,
     private router: Router,
     public ngZone: NgZone,
     private http: HttpClient
@@ -60,7 +59,7 @@ export class AuthService {
  
 
    GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
+    return this.AuthLogin(new GoogleAuthProvider());
   }
 
   createUsers(user: User) {
@@ -87,7 +86,7 @@ export class AuthService {
   //    return this.updateUserData(credential.user);
   //  }
   AuthLogin(provider) {
-    return this.afAuth.signInWithPopup(provider)
+    return signInWithPopup(this.auth, provider)
     .then((result) => {
        this.ngZone.run(() => {
         let  userData: User = {
@@ -152,11 +151,11 @@ export class AuthService {
 
 
    async signOut(){
-     await this.afAuth.signOut();
+     await signOut(this.auth);
      this.router.navigate(['/']);
    }
    getUserState() {
-    return this.afAuth.authState;
+    return authState(this.auth);
   }
  async SignIn(user,pasword){
   console.log("the is a test");

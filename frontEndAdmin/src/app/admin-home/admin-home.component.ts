@@ -3,7 +3,6 @@ import { AuthService } from '../services/auth.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { DriverService } from '../services/driver.service';
 import { User } from '../model/user';
-import { unescapeIdentifier } from '@angular/compiler';
 
 @Component({
   selector: 'app-admin-home',

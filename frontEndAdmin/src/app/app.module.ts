@@ -10,9 +10,9 @@ import { DriverRegistrationComponent } from './driver-registration/driver-regist
 import { LotOwnerRegistrationComponent } from './lot-owner-registration/lot-owner-registration.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { enableProdMode } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
@@ -40,18 +40,6 @@ const  firebaseConfig= {
          measurementId: "G-WYEZC528F2"
 
 }
-const routes: Routes = [
-  { path: 'userprofile', component: UserProfileComponent },
-  { path: 'driverregistration', component: DriverRegistrationComponent },
-  { path: '', component: NavigationComponent },
-  { path: 'adminhome', component: AdminHomeComponent },
-  { path: 'adminhome/uid', component: AdminHomeComponent },
-  { path: 'adminshowlistusers', component: AdminShowListUsersComponent},
-  { path: 'editdriverdetails', component: EditDriverDetailsComponent},
- 
-
-
-];
 
 
 @NgModule({
@@ -70,9 +58,6 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
     HttpClientModule,
     MatTableModule,
     MatIconModule,
@@ -83,8 +68,7 @@ const routes: Routes = [
     MatInputModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatPaginatorModule,
-    RouterModule.forRoot(routes)
+    MatPaginatorModule
   ],
   exports: [  MatTableModule,
     MatIconModule,
@@ -95,9 +79,13 @@ const routes: Routes = [
     MatSnackBarModule,
     MatPaginatorModule ],
   
-  providers: [ AuthService ],
-  bootstrap: [AppComponent],
-  entryComponents:[EditDriverDetailsComponent]
+  providers: [ 
+    AuthService,
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth())
+  ],
+  bootstrap: [AppComponent]
 
 })
 export class AppModule { }
